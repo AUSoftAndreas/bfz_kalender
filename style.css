@@ -1,0 +1,159 @@
+#header {
+	padding: 1em;
+	text-align: center;
+	background: darkblue;
+	color: white;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+#header h1 {
+	margin: 0;
+	padding: 0;
+}
+
+#kalenderblatt {
+  display: grid;
+	grid-template-columns: repeat(8, 1fr);
+  border-bottom: 1px solid darkblue;
+  border-right: 1px solid darkblue;
+  max-width: 24em;
+}
+
+#kalenderblatt_links {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  background: darkblue;
+  color: white;
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+  display: table;
+  cursor: pointer;
+}
+
+#kalenderblatt_links:hover {
+  background: blue;
+}
+
+#kalenderblatt_links p {
+  display: table-cell;
+  vertical-align: middle;
+  margin: 0;
+}
+
+#kalenderblatt_monat {
+  grid-column-start: 2;
+  grid-column-end: 8;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 0.25em;
+  color: white;
+  background: darkblue;
+}
+
+#kalenderblatt_monat p {
+  margin: 0;
+}
+
+#kalenderblatt_rechts {
+  grid-column-start: 8;
+  grid-column-end: 9;
+  background: darkblue;
+  color: white;
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+  display: table;
+  cursor: pointer;
+}
+
+#kalenderblatt_rechts:hover {
+  background: blue;
+}
+
+
+#kalenderblatt_rechts p {
+  display: table-cell;
+  vertical-align: middle;
+  margin: 0;
+}
+
+#kalenderdiv {
+  margin: 1em;
+  padding: 1em;
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+#text {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  margin: 1em;
+  font-size: 1.3em;
+  padding: 1em;
+}
+  
+#wrapper {
+  display: grid;
+	grid-template-columns: 1fr 2fr;
+}
+  
+.kalenderblatt_cell {
+  background: white;
+  text-align: center;
+  padding: 0.25em;
+  border-top: 1px solid darkblue;
+  border-left: 1px solid darkblue;
+  cursor: pointer;
+}
+
+.kalenderblatt_cell:hover {
+  background: yellow;
+}
+
+.kalenderblatt_cell.monat_akt.aktuell {
+  background: pink;
+}
+
+.kalenderblatt_cell.monat_akt.sa {
+  color: darkblue;
+}
+
+.kalenderblatt_cell.monat_akt.so {
+  color: red;
+}
+
+.kalenderblatt_cell.kw {
+  font-style: italic;
+  font-size: 0.9rem;
+  cursor: unset;
+  color: grey;
+}
+
+.kalenderblatt_cell.kw:hover {
+  background: unset;
+}
+
+.kalenderblatt_cell.monat_next {
+  color: grey;
+}
+
+.kalenderblatt_cell.monat_prev {
+  color: grey;
+}
+
+.kalenderblatt_header {
+  background: lightblue;
+  text-align: center;
+  padding: 0.25em;
+  border-top: 1px solid darkblue;
+  border-left: 1px solid darkblue;
+}
+
+body {
+	margin: 0;
+}
+
+

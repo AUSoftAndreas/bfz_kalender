@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Kalender: 19.08.2020</title>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</head>
+	<body>
+		<div id="wrapper">
+			<div id="header">
+				<h1>Kalenderblatt vom <span id="header_datumd">X</span></h1>
+			</div>
+			<div id="kalenderdiv">
+				<div id="kalenderblatt"></div>
+			</div>
+			<div id="text">
+				<p>
+					Der <span id="text_datumd">X</span> ist ein <span id="text_wochentag1">X</span>, genauer gesagt der
+					<span id="text_wochentagx">X</span>
+					<span id="text_wochentag2">X</span> im
+					<span id="text_datum_monatsname">X</span>
+					<span id="text_datum_jahr">X</span>
+				</p>
+			</div>
+		</div>
+	</body>
+	<script language="javascript" type="text/javascript" src="js.js"></script>
+
+	<script language="javascript" type="text/javascript">
+		function buildAlles(datHeute) {
+			// feste Arrays
+			const wochentagArray = ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"];
+			const enumerationArray = ["nullte", "erste", "zweite", "dritte", "vierte", "fünfte"];
+			const monatsnamenArray = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
+			// Berechnungen für die Ersetzungen
+			const datErster = new Date(datHeute.getFullYear(), datHeute.getMonth(), 1);
+			const datHeuteF =
+				(datHeute.getDate() < 10 ? "0" : "") +
+				datHeute.getDate() +
+				"." +
+				(datHeute.getMonth() < 9 ? "0" : "") +
+				(datHeute.getMonth() + 1) +
+				"." +
+				datHeute.getFullYear();
+			const datHeuteWochentag = datHeute.getDay(); // beginnt mit 0 = Sonntag bis 6 = Samstag
+			const datHeuteWochentagName = wochentagArray[datHeuteWochentag];
+			const datHeuteWochentagX = enumerationArray[Math.floor((datHeute.getDate() - 1) / 7) + 1];
+			const datHeuteMonatsname = monatsnamenArray[datHeute.getMonth()];
+			const datHeuteJahr = datHeute.getFullYear();
+
+			// Ersetzungen im Text
+			document.getElementById("header_datumd").innerHTML = datHeuteF;
+			document.getElementById("text_datumd").innerHTML = datHeuteF;
+			document.getElementById("text_wochentag1").innerHTML = datHeuteWochentagName;
+			document.getElementById("text_wochentag2").innerHTML = datHeuteWochentagName;
+			document.getElementById("text_wochentagx").innerHTML = datHeuteWochentagX;
+			document.getElementById("text_datum_monatsname").innerHTML = datHeuteMonatsname;
+			document.getElementById("text_datum_jahr").innerHTML = datHeuteJahr;
+			document.title = "Kalender: " + datHeuteF;
+		}
+
+		function buildCalendar(datMonat, datMarker) {
+			document.getElementById("kalenderdiv").innerHTML = getCalendarHTML(datMonat, datMarker);
+			if (datMarker) {
+				var ctrl = document.getElementById("kalenderblatt_datum_" + getDatStringFromDatum(datMarker));
+				if (ctrl) {
+					ctrl.classList.add("aktuell");
+				}
+			}
+		}
+
+		function kalenderClick(id) {
+			datum = getDatumFromDatString(id);
+			buildAlles(datum);
+			buildCalendar(datum, datum);
+		}
+
+		function kalenderMonatClick(idMonat, idMarker) {
+			datumMonat = getDatumFromDatString(idMonat);
+			datumMarker = getDatumFromDatString(idMarker);
+			buildCalendar(datumMonat, datumMarker);
+		}
+
+		// Heutiges Datum wird ausgelesen
+		var datHeute = new Date();
+		// Heutiges Datum wird ggf. durch GET modifiziert
+		var $_GET = getGET();
+		if ("datum" in $_GET) {
+			var datString = "";
+			datString = $_GET["datum"];
+			if ((datString.length = 8)) {
+				var numbers = /^[0-9]+$/;
+				if (datString.match(numbers)) {
+					datHeute = getDatumFromDatString(datString);
+				}
+			}
+		}
+		buildAlles(datHeute);
+		buildCalendar(datHeute, datHeute);
+	</script>
+</html>
