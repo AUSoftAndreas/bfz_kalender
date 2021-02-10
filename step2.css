@@ -1,0 +1,20 @@
+#seitenkopf {
+    background: lime;
+}
+
+#kalenderblatt {
+    background: palevioletred;
+}
+
+#introtext {
+    background-color: powderblue;
+}
+
+#historie {
+    background: goldenrod;
+}
+
+.kw {
+    font-style: italic;
+    font-size: smaller;
+}

@@ -1,0 +1,141 @@
+/*==============================================================================
+// BODY: Grundlegender Aufbau des Grids                                       //
+==============================================================================*/
+
+body {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    /*Im Verhältnis 1:2 wird der Bildschirm aufgeteilt*/
+    margin: 0;
+}
+
+
+/*==============================================================================
+// SEITENKOPF                                                                 //
+==============================================================================*/
+
+#seitenkopf {
+    padding: 1em;
+    text-align: center;
+    background: darkblue;
+    color: white;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    /*Seitenkopf geht über beide Spalten*/
+}
+
+#seitenkopf h1 {
+    margin: 0;
+    padding: 0;
+}
+
+
+/*==============================================================================
+// INTROTEXT UND HISTORIE                                                     //
+==============================================================================*/
+
+#introtext,
+#historie {
+    padding: 1em;
+    grid-column-start: 2;
+    /*Historie und Introtxt sind hingegen nur rechts in der Spalte zuhause*/
+    grid-column-end: 3;
+    margin: 1em;
+    font-size: 1.3em;
+    padding: 1em;
+}
+
+
+/*==============================================================================
+// KALENDERBLATT                                                              //
+==============================================================================*/
+
+#kalenderblatt {
+    border-bottom: 1px solid darkblue;
+    /*Border unten um das gesamte Feld*/
+    border-right: 1px solid darkblue;
+    /*Border rechts um das gesamte Feld*/
+}
+
+#kalenderblatt table {
+    margin: 25px auto;
+    /*Oben und unten 25 Punkte Abstand zu allem (zu den Grenzen des DIVs), links und rechts auto = zentriert*/
+    border-right: 1px solid darkblue;
+    /*Border rechts um gesamte Tabelle*/
+    border-bottom: 1px solid darkblue;
+    /*Border unten an gesamter Tabelle*/
+    /*Die Border nach links und oben ziehen wir in den einzelnen Zellen*/
+    border-spacing: inherit;
+}
+
+#kalenderblatt table th {
+    border-top: 1px solid darkblue;
+    /* Jede th-Zelle bekommt oben / links eine Border*/
+    border-left: 1px solid darkblue;
+}
+
+#kalenderblatt table td {
+    background: white;
+    text-align: center;
+    padding: 0.25em;
+    /*Bisserl Platz um den Inhalt der einzelnen Zellen (Datumswerte)*/
+    border-top: 1px solid darkblue;
+    /*Jede td-Zelle erhält eine linke und obere Border, auf diese Weise ergibt sich dann das Gitternetz*/
+    border-left: 1px solid darkblue;
+    cursor: pointer;
+    /*Mauszeiger verändert Form, wenn wir über die Tabellenzellen fahren, um anzuzeigen, dass man hier sinnvollerweise klicken kann*/
+}
+
+#kalenderblatt td:hover {
+    background: yellow;
+    /*Hintergrund gelb, wenn man mit der Maus drüber fährt*/
+}
+
+#kalenderblatt td.heute {
+    background: pink;
+    /*Der heutige Tag wird markiert*/
+}
+
+#kalenderblatt td.heute:hover {
+    background: yellow;
+    /*Der heutige Tag wird auch gelb beim Drüberfahren*/
+}
+
+#kalenderblatt td.sa {
+    color: darkblue;
+    /*Samstage sind blau dargestellt*/
+}
+
+#kalenderblatt td.so {
+    color: red;
+    /*Sonnage sind rot dargestellt*/
+}
+
+#kalenderblatt td.kw {
+    font-style: italic;
+    /*Kw-Angaben kleiner und in Kursivschrift*/
+    font-size: 0.9rem;
+    cursor: unset;
+    /*Kw kann man nicht klicken, also Cursor anders*/
+    color: grey;
+}
+
+#kalenderblatt td.kw:hover {
+    background: unset;
+    /*Nix passiert, wenn man über KW hovert*/
+}
+
+
+/*==============================================================================
+// DEBUG                                                                      //
+==============================================================================*/
+
+#debug {
+    background: lightcoral;
+    border-right: 1px solid darkblue;
+    border-bottom: 1px solid darkblue;
+}
+
+span {
+    background: lightcoral;
+}
