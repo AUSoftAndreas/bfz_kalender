@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Microsoft Edge: This file",
+            "request": "launch",
+            "type": "pwa-msedge",
+            "file": "${file}"
+        },
+        {
+            "name": "Firefox: This file",
+            "type": "firefox",
+            "request": "launch",
+            "reAttach": true,
+            "file": "${file}"
+        }
+    ]
+}
