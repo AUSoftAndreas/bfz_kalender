@@ -202,7 +202,7 @@ function getDayHTML(date, today, holidayArray) {
         html += '<td class="kw">' + getCalendarWeek(date) + "</td>";
     }
     let weekdayGerman = getWeekdayShortGerman(weekday);
-    cssClass += " " + weekdayGerman;
+    cssClass += weekdayGerman;
     if (holidayArray.includes(date.getTime())) {
         cssClass += " feiertag";
     }
@@ -210,7 +210,7 @@ function getDayHTML(date, today, holidayArray) {
         cssClass += " heute";
     }
     // Eigentliche HTML-Generation
-    html += '<td class = "' + cssClass.trim() + '" onClick="changeTime(' + date.getTime() + ')">' + date.getDate() + "</td>";
+    html += '<td class = "' + cssClass + '" onClick="changeTime(' + date.getTime() + ')">' + date.getDate() + "</td>";
 
     if (weekday == 0) {
         // Sontag: Zeile beenden

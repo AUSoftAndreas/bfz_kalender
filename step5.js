@@ -1,11 +1,8 @@
-// Hier sagen wir dem Browser nur, dass erm nachdem die Seite vollständig geladen
-// wurde, die Funktion main(ohne Argumente) aufrufen soll.
 window.onload = function() {
     main();
 };
 
 function main() {
-    // Grund-Daten
     let strDebug = "";
     let datToday = new Date();
     strDebug += "datToday: " + datToday.toDateString() + "<br/>"; // Ausgabe
@@ -18,15 +15,12 @@ function main() {
     let weekdayGerman = getWeekdayGerman(weekday);
     strDebug += "weekdayGerman: " + weekdayGerman + "<br/>";
 
-    // Wir füllen die Informationen in den HTML-Code
     document.getElementById("field1").innerHTML = datTodayGerman;
     document.getElementById("field2").innerHTML = weekdayGerman;
 
-    //console.log(datToday);
     let htmlTabelle = calendarHTML(datToday);
     document.getElementById("kalenderblatt").innerHTML = htmlTabelle;
 
-    // Ausgabe in das elDebug
     let elDebug = document.getElementById("debug");
     if (elDebug != null) {
         elDebug.innerHTML = strDebug;
@@ -106,10 +100,8 @@ function getWeekdayShortGerman(weekdayIndex) {
 
 function calendarHTML(date) {
     // Erster des Monats berechnen
-    //console.log(date);
     let firstOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
-    //console.log(firstOfMonth);
-    // Wochentag bestimmen
+    // Wochentag des Monatsersten bestimmen
     let firstOfMonthWeekday = firstOfMonth.getDay();
     // Wenn der Monat nicht mit einem Montag startet, müssen wir Tage des Vormonats
     // ebenfalls darstellen
@@ -121,20 +113,8 @@ function calendarHTML(date) {
     }
     let firstOfCalendar = new Date(firstOfMonth);
     firstOfCalendar.setDate(firstOfCalendar.getDate() - offsetStart);
-    //console.log(firstOfCalendar);
-    // Wann ist der letzte Tag im Monat? Wir starten die Beantwortung dieser Frage, indem
-    // wir den ersten des nächsten Monats berechnen
-    // Man beachte den mehrfachen Einsatz des ternären Operator (ternary operator)
-    let firstOfNextMonth = new Date(
-        date.getMonth() == 11 ? date.getFullYear() + 1 : date.getFullYear(),
-        date.getMonth() == 11 ? 1 : date.getMonth() + 1,
-        1
-    );
-    //console.log(firstOfNextMonth);
-    // Letzte des Monats ist einen Tag (24 x 60 x 60 x 1000 Millisekunden) davor
-    let lastOfMonth = new Date(firstOfNextMonth);
-    lastOfMonth.setDate(lastOfMonth.getDate() - 1);
-    //console.log(lastOfMonth);
+    // Letzte des Monats ist der 0te des Folgemonats
+    let lastOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
     // Wenn der Letzte des Monats nicht zufällig ein Sonntag ist, müssen wir auch Tage des nächsten Monats
     // in unserem Kalender darstellen
     let lastOfMonthWeekday = lastOfMonth.getDay();
@@ -144,9 +124,8 @@ function calendarHTML(date) {
     } else {
         offsetEnd = 7 - lastOfMonthWeekday;
     }
-    let lastOfCalendar = new Date(lastOfMonth);
-    lastOfCalendar.setDate(lastOfCalendar.getDate() + offsetEnd);
-    //console.log(lastOfCalendar);
+    // Einfach Tage aufaddieren
+    let lastOfCalendar = new Date(lastOfMonth.getFullYear(), lastOfMonth.getMonth(), lastOfMonth.getDate() + offsetEnd);
 
     // Jetzt beginnt das eigentliche Zeichnen des Kalenders
     let html = "";
@@ -188,7 +167,6 @@ function calendarHTML_head(date) {
 }
 
 function calendarHTML_cell(date) {
-    // console.log(date);
     let html = "";
     let cssClass = "";
     let weekday = date.getDay();
@@ -196,21 +174,12 @@ function calendarHTML_cell(date) {
         // Montag: Neue Zeile beginnen
         html += "<tr>";
         // und Zelle für die Kalenderwoche
-
         html += '<td class="kw">' + getCalendarWeek(date) + "</td>";
     }
     let weekdayGerman = getWeekdayShortGerman(weekday);
-    // console.log(weekdayGerman);
     cssClass += " " + weekdayGerman;
-    // console.log(cssClass);
-
-    // TODO: Prüfung auf Feiertage
-
-    // Eigentliche HTML-Generation
     html += '<td class = "' + cssClass.trim() + '">' + date.getDate() + "</td>";
-
     if (weekday == 0) {
-        // Sontag: Zeile beenden
         html += "</tr>";
     }
     return html;
